@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
         $role->save();
 
         $user->roles()->attach($role->id,['created_at'=>Carbon::now()->format('Y-m-d H:i:s'),'updated_at'=>Carbon::now()->format('Y-m-d H:i:s')]);
-        
+        //many to many
         DB::table('role_user')->insert([
             'role_id'=>$role->id,
             'user_id'=>$user->id,
