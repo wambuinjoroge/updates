@@ -39,4 +39,8 @@ class User extends Authenticatable
     ];
 
     use HasApiTokens, Notifiable;
+
+    public function roles(){
+        return $this->belongsToMany('App\Role');
+    }
 }
