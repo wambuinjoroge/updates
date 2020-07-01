@@ -15,15 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::group(['prefix'=>'API'],function(){
-//     Route::get('/user', function (Request $request) {
-//         return $request->user();
-//     }); 
+
 //     Route::group(['prefix'=>'auth'],function(){
 //         Route::post('login','UsersController@login');
 //     });      
 // });
-Route::middleware('api')->group(function () {
-    Route::post('login','API\UsersController@login');
-    Route::get('users','API\UsersController@index');
+Route::namespace('API')->group(function () {
+    Route::post('login','UsersController@login');
 });
 
+Route::middleware('auth:api')->namespace('API')->group(function () {
+    Route::get('user', function (Request $request) {
+        return $request->user();
+    });
+    Route::get('users','UsersController@index');
+});

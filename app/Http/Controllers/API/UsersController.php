@@ -18,17 +18,25 @@ class UsersController extends Controller
 
     // login
     public function login(Request $request){
-
+        // validate the request
         $request->validate([
             'email'=>'required|string|email',
             'password'=>'required|string',
         ]);
+        if(Auth::attempt(['email'=>request('email'),'password'=>request('password')])){
+            $user = Auth::user();
+        }
 
-        $user = User::where(['email',$request->email])->first();
+        // $user = User::find(1);
+    
 
         $token = $user->createToken('My Token')->accessToken;
 
-        return $token;
+        return \Response::json([
+            'access_token'=>$token,
+            'token_type'=>'Bearer',
+            // 'expires_at'=>Carbon::parse($token->expires_at)->toDateTimeString()
+        ]);
 
         // if(!Auth::attempt($credentials))  
         //     return response()->json(['message'=>'Unauthorized'],401);
