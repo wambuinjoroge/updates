@@ -25,8 +25,15 @@ Route::namespace('API')->group(function () {
 });
 
 Route::middleware('auth:api')->namespace('API')->group(function () {
+    // Auth
     Route::get('user', function (Request $request) {
         return $request->user();
     });
     Route::get('users','UsersController@index');
+
+    // Posts
+    Route::prefix('posts')->group(function(){
+        Route::get('/','PostsController@index');
+
+    });
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Posts;
 
 class PostsController extends Controller
 {
@@ -14,7 +15,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Posts::all();
+        return \Response::json($posts);
     }
 
     /**
