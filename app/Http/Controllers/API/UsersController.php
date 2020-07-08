@@ -103,6 +103,20 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // print_r($request->all());exit;
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|string',
+            'password'=>'required'
+        ]);
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = Hash::make($request->get('password'));
+
+        $user->save();
+
+        return \Response::json(['message'=>'User updated successfully',$user,201]);
     }
 
     /**

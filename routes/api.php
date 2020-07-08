@@ -33,6 +33,7 @@ Route::middleware('auth:api')->namespace('API')->group(function () {
         Route::get('/','UsersController@index');
         Route::get('/{id}','UsersController@show');
         Route::post('/store','UsersController@store');
+        Route::post('/update/{id}','UsersController@update');
     });
 
     // Posts
