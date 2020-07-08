@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -29,7 +30,6 @@ class UsersController extends Controller
 
         // $user = User::find(1);
     
-
         $token = $user->createToken('My Token')->accessToken;
 
         return \Response::json([
@@ -37,31 +37,12 @@ class UsersController extends Controller
             'token_type'=>'Bearer',
             // 'expires_at'=>Carbon::parse($token->expires_at)->toDateTimeString()
         ]);
-
-        // if(!Auth::attempt($credentials))  
-        //     return response()->json(['message'=>'Unauthorized'],401);
-        //     $user = $request->user();
-        //     $tokenResult = $user->createToken("Personal Access Token");
-        //     $token = $tokenResult->token;
-
-        //     if($request->remember_me){
-        //         $token->expires_at = Carbon::now()->addweeks(1);
-        //         $token->save();
-
-        //         return response()->json([
-        //             'access_token'=>$tokenResult->accessToken,
-        //             'token_type'=>'Bearer',
-        //             'expires_at'=>Carbon::parse(
-        //                 $tokenResult->token->expires_at
-        //             )->toDateTimeString()
-        //         ]);
-        //     }
     
     }
 
     public function index()
     {
-        //
+        //Fetch all users
         $users=User::all();
         return response()->json([$users]);
     }
@@ -74,7 +55,28 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Fetch a single user
+        // print_r($request->all());exit;
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|string',
+            'password'=>'required'
+        ]);
+
+        $user= new User;
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        // $user->password = $request->get->Hash::make('password');
+        $user->password = Hash::make($request->get('password'));
+
+        $user->save();
+    
+
+        return \Response::json([
+            'message'=>'User created successfully',
+            $user,201
+        ]);
+
     }
 
     /**

@@ -26,10 +26,13 @@ Route::namespace('API')->group(function () {
 
 Route::middleware('auth:api')->namespace('API')->group(function () {
     // Auth
-    Route::get('user', function (Request $request) {
-        return $request->user();
+    Route::prefix('users')->group(function(){
+        // Route::get('/', function (Request $request) {
+        //     return $request->user();
+        // });
+        Route::get('/','UsersController@index');
+        Route::post('/store','UsersController@store');
     });
-    Route::get('users','UsersController@index');
 
     // Posts
     Route::prefix('posts')->group(function(){
