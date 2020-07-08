@@ -88,6 +88,9 @@ class UsersController extends Controller
     public function show($id)
     {
         //
+        $user = User::find($id);
+        // print_r($user);exit;
+        return \Response::json(['message'=>'Successfully fetched user',$user,201]);
     }
 
     /**

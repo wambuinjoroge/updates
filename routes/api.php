@@ -31,6 +31,7 @@ Route::middleware('auth:api')->namespace('API')->group(function () {
         //     return $request->user();
         // });
         Route::get('/','UsersController@index');
+        Route::get('/{id}','UsersController@show');
         Route::post('/store','UsersController@store');
     });
 
