@@ -128,5 +128,9 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::find($id);
+        $user->delete();
+
+        return \Response::json(['message'=>'User deleted successfully',$user,201]);
     }
 }
