@@ -31,7 +31,7 @@ Route::middleware('auth:api')->namespace('API')->group(function () {
         //     return $request->user();
         // });
         Route::get('/','UsersController@index');
-        Route::get('/{id}','UsersController@show');
+        Route::get('/{user}','UsersController@show');
         Route::post('/store','UsersController@store');
         Route::post('/update/{id}','UsersController@update');
         Route::post('/{id}','UsersController@destroy');
@@ -40,6 +40,5 @@ Route::middleware('auth:api')->namespace('API')->group(function () {
     // Posts
     Route::prefix('posts')->group(function(){
         Route::get('/','PostsController@index');
-
     });
 });

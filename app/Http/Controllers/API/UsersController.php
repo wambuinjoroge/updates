@@ -85,10 +85,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user)
     {
-        //
-        $user = User::find($id);
+        // $user = User::find($user);
         // print_r($user);exit;
         return \Response::json(['message'=>'Successfully fetched user',$user,201]);
     }
