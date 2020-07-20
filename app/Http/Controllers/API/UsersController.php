@@ -85,9 +85,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($user)
+    public function show(User $user)
     {
+        // Method 1: Without route model binding
         // $user = User::find($user);
+
+        // With implicit route model binding
+        // return $user;
         // print_r($user);exit;
         return \Response::json(['message'=>'Successfully fetched user',$user,201]);
     }

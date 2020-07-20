@@ -32,6 +32,8 @@ Route::middleware('auth:api')->namespace('API')->group(function () {
         // });
         Route::get('/','UsersController@index');
         Route::get('/{user}','UsersController@show');
+        // Using other columns to retrieve data e.g name column
+        // Route::get('/{user:name}','UsersController@show');
         Route::post('/store','UsersController@store');
         Route::post('/update/{id}','UsersController@update');
         Route::post('/{id}','UsersController@destroy');
