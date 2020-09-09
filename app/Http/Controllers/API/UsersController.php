@@ -40,6 +40,16 @@ class UsersController extends Controller
     
     }
 
+    public function logout(Request $request){
+
+        $request->user()->token()->revoke();
+
+        return \Response::json([
+            'message'=>'Successfully logged out'
+        ]);
+     
+    }
+
     public function index()
     {
         //Fetch all users

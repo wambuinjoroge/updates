@@ -21,11 +21,14 @@ use Illuminate\Support\Facades\Route;
 //     });      
 // });
 Route::namespace('API')->group(function () {
+    // Auth login
     Route::post('login','UsersController@login');
 });
 
 Route::middleware('auth:api')->namespace('API')->group(function () {
-    // Auth
+    // Auth logout
+    Route::get('logout','UsersController@logout');
+
     Route::prefix('users')->group(function(){
         // Route::get('/', function (Request $request) {
         //     return $request->user();
